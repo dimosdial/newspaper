@@ -1,0 +1,176 @@
+<!doctype html>
+<html lang="el">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="apple-mobile-web-app-title" content="Πρωτοσέλιδο">
+<title>Πρωτοσέλιδο</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=GFS+Didot&family=Commissioner:wght@400;500;600;700&display=swap">
+<style>
+/* Layout: a broadsheet front page. Masthead, a strip of daily apps, then sections set like newspaper columns; one column on phones with a sticky section index. */
+:root{
+  --paper:#f7f6f2; --ink:#16181a; --muted:#5f6661; --rule:#d8d8d0; --tile:#ffffff;
+  --green:#0b6b3a; --green-soft:#e3efe7;
+  --serif:"GFS Didot","Didot","Bodoni 72","Times New Roman",serif;
+  --sans:"Commissioner",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --paper:#141615; --ink:#ecebe6; --muted:#9aa39d; --rule:#2c302d; --tile:#1c1f1d;
+  --green:#4fbf80; --green-soft:#183324; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --paper:#141615; --ink:#ecebe6; --muted:#9aa39d; --rule:#2c302d; --tile:#1c1f1d;
+  --green:#4fbf80; --green-soft:#183324; color-scheme:dark}
+
+*{box-sizing:border-box}
+body{background:var(--paper);color:var(--ink);font-family:var(--sans);font-size:15px;line-height:1.45;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:20px 48px}
+.wrap{max-width:1180px;margin:0 auto}
+a{color:inherit;text-decoration:none}
+a:focus-visible,input:focus-visible{outline:2px solid var(--green);outline-offset:2px;border-radius:4px}
+
+/* Masthead */
+.mast{text-align:center;border-bottom:3px double var(--ink);padding-bottom:10px}
+.mast .top{display:flex;justify-content:space-between;gap:12px;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);border-bottom:1px solid var(--rule);padding-bottom:8px}
+.mast h1{font-family:var(--serif);font-weight:400;font-size:clamp(44px,9vw,92px);line-height:1;margin:14px 0 6px;letter-spacing:.01em;text-wrap:balance}
+.mast .sub{font-size:13px;color:var(--muted)}
+.mast .sub b{color:var(--green);font-weight:600}
+
+/* Search + index */
+.bar{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--paper);display:flex;gap:10px;align-items:center;flex-wrap:wrap;padding:12px 0;border-bottom:1px solid var(--rule)}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--paper)}
+.bar input{flex:1 1 220px;min-width:0;font:inherit;font-size:15px;padding:9px 12px;border:1px solid var(--rule);border-radius:8px;background:var(--tile);color:var(--ink)}
+.idx{display:flex;gap:6px;flex-wrap:wrap}
+.idx a{font-size:13px;font-weight:500;padding:6px 10px;border-radius:999px;background:var(--green-soft);color:var(--green)}
+.idx a:hover{background:var(--green);color:var(--paper)}
+
+/* Daily strip */
+.daily{display:grid;grid-template-columns:repeat(auto-fill,minmax(92px,1fr));gap:10px;padding:18px 0;border-bottom:1px solid var(--rule)}
+.app{display:flex;flex-direction:column;align-items:center;gap:6px;padding:10px 4px;border-radius:12px;font-size:13px;font-weight:500;text-align:center}
+.app:hover{background:var(--tile)}
+.mono{width:44px;height:44px;border-radius:12px;display:grid;place-items:center;font-family:var(--serif);font-size:22px;color:#fff}
+
+/* Columns */
+.paper{display:grid;gap:0 32px;grid-template-columns:1.25fr 1fr 1fr;padding-top:8px}
+.col{min-width:0;display:flex;flex-direction:column;gap:0}
+@media (max-width:960px){.paper{grid-template-columns:1fr 1fr}}
+@media (max-width:640px){.paper{grid-template-columns:1fr}}
+.col+.col{border-left:1px solid var(--rule);padding-left:32px}
+@media (max-width:960px){.col:nth-child(3){grid-column:1/-1;border-left:0;padding-left:0;border-top:1px solid var(--rule);margin-top:8px}}
+@media (max-width:640px){.col+.col{border-left:0;padding-left:0;border-top:1px solid var(--rule);margin-top:8px}}
+
+section{padding:18px 0 10px;scroll-margin-top:72px}
+section+section{border-top:1px solid var(--rule)}
+.kicker{font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--green);margin:0 0 2px}
+h2{font-family:var(--serif);font-weight:400;font-size:30px;line-height:1.1;margin:0 0 10px;text-wrap:balance}
+h3{font-size:12px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin:14px 0 4px}
+
+ul{list-style:none;margin:0;padding:0}
+li a{display:flex;justify-content:space-between;align-items:baseline;gap:10px;padding:7px 0;border-bottom:1px dotted var(--rule)}
+li a:hover .n{color:var(--green);text-decoration:underline;text-underline-offset:3px}
+.n{font-weight:500;min-width:0}
+.d{font-size:12px;color:var(--muted);white-space:nowrap;flex-shrink:0}
+.lead li a .n{font-family:var(--serif);font-size:21px;font-weight:400}
+.lead li a{padding:9px 0}
+.two{columns:2;column-gap:20px}
+.two li{break-inside:avoid}
+@media (max-width:400px){.two{columns:1}}
+
+.empty{color:var(--muted);font-style:italic;padding:12px 0}
+footer{margin-top:28px;padding-top:12px;border-top:3px double var(--ink);font-size:12px;color:var(--muted);text-align:center}
+@media (prefers-reduced-motion:no-preference){li a,.app,.idx a{transition:background .15s,color .15s}}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <header class="mast">
+    <div class="top"><span id="date">Σήμερα</span><span>Αθήνα</span></div>
+    <h1>Πρωτοσέλιδο</h1>
+    <div class="sub" id="greet">Τα νέα, τα αθλητικά και τα blogs σου <b>σε μία σελίδα</b></div>
+  </header>
+
+  <div class="bar">
+    <input id="q" type="search" placeholder="Βρες ένα site…" aria-label="Αναζήτηση στα sites">
+    <nav class="idx" aria-label="Ενότητες">
+      <a href="#news">Ειδήσεις</a><a href="#sport">Αθλητικά</a><a href="#blogs">Blogs</a><a href="#topics">Θέματα</a><a href="#tools">Χρήσιμα</a>
+    </nav>
+  </div>
+
+  <div class="daily" id="daily"></div>
+
+  <main class="paper" id="paper"></main>
+  <p class="empty" id="none" hidden>Δεν βρέθηκε κάτι με αυτό το όνομα.</p>
+
+  <footer>Πρωτοσέλιδο · τα links από τα Favourites σου στο Safari</footer>
+</div>
+
+<script>
+const daily=[
+ ["Gmail","https://mail.google.com/","#c5221f"],["YouTube","https://www.youtube.com/","#cc0000"],
+ ["Feedly","https://feedly.com/i/my","#2bb24c"],["Drive","https://drive.google.com/drive/home","#1a73e8"],
+ ["ChatGPT","https://chat.openai.com/","#10a37f"],["Cosmote TV","https://www.cosmotetvott.gr/","#00a650"],
+ ["Stremio","https://web.stremio.com/","#7b5bf5"],["Meteo","https://www.meteo.gr/cf.cfm?city_id=12","#1f6fb5"],
+ ["Winbank","https://www.winbank.gr/","#ffb81c"],["Facebook","https://www.facebook.com/","#1877f2"],
+ ["X","https://x.com/","#222222"],["LinkedIn","https://www.linkedin.com/","#0a66c2"]
+];
+const S=(n,u)=>({n,u});
+const cols=[
+ [ {id:"news",k:"Ενημέρωση",t:"Ειδήσεις",lead:true,groups:[
+    ["",[S("News 24/7","https://www.news247.gr/"),S("Πρώτο Θέμα","https://www.protothema.gr/"),S("ThePressProject","https://www.thepressproject.gr/"),S("Documento","https://www.documentonews.gr/"),S("Κουρδιστό Πορτοκάλι","https://kourdistoportocali.com/"),S("SLPress","https://slpress.gr/"),S("Pronews","https://www.pronews.gr/")]],
+    ["Συλλογές",[S("Google Ειδήσεις","https://news.google.com/?hl=el&gl=GR&ceid=GR:el"),S("Flipboard","https://flipboard.com/"),S("Feedly","https://feedly.com/i/my")]]]},
+   {id:"culture",k:"Ελεύθερος χρόνος",t:"Πόλη & Πολιτισμός",groups:[
+    ["",[S("Athinorama","https://www.athinorama.gr/"),S("More.com — Εκδηλώσεις","https://www.more.com/gr-el/"),S("Popaganda","https://popaganda.gr/"),S("OneMan","https://www.oneman.gr/"),S("Unboxholics","https://unboxholics.com/"),S("Πρόγραμμα TV","https://programmatileorasis.gr/")]]]}
+ ],
+ [ {id:"sport",k:"Αθλητικά",t:"Γήπεδο",groups:[
+    ["",[S("Gazzetta","https://www.gazzetta.gr/"),S("SDNA","https://www.sdna.gr/"),S("Athletiko","https://www.athletiko.gr/"),S("Livescore","https://www.livescore.com/"),S("Futbol24","https://el.futbol24.com/Live/"),S("Αγώνες στην TV","https://www.livesoccertv.com/")]],
+    ["Παναθηναϊκός",[S("Panathinaikos Press","https://www.panathinaikospress.com/"),S("The Hateful 8","https://thehateful8.gr/"),S("SDNA — ΠΑΟ Μπάσκετ","https://www.sdna.gr/teams/panathinaikos-aktor"),S("PanathaGR forum","http://www.panathagrforum.net/")]],
+    ["Μπάσκετ",[S("EuroLeague","https://www.euroleaguebasketball.net/euroleague/"),S("Eurohoops","https://www.eurohoops.net/el/"),S("Pick and Roll","https://www.pickandroll.gr/category/eidiseis/evropi/euroleague/"),S("Hoopfellas","https://www.hoopfellas.gr/el/"),S("BasketBlog","https://www.basketblog.gr/")]],
+    ["Highlights",[S("Novasports Web TV","https://www.novasports.gr/web-tv"),S("HooFoot","https://hoofoot.com/"),S("r/footballhighlights","https://www.reddit.com/r/footballhighlights/"),S("Cosmote TV στο YouTube","https://www.youtube.com/user/otegr")]],
+    ["Forums",[S("RedCafe","https://www.redcafe.net/"),S("Interbasket","https://interbasket.net/forums/"),S("r/Euroleague","https://www.reddit.com/r/Euroleague/")]]]}
+ ],
+ [ {id:"blogs",k:"Απόψεις",t:"Blogs",groups:[
+    ["",[S("Το Εξπρές του Διαδικτύου","https://nikosmaris.substack.com/"),S("Analyst","https://www.analyst.gr/"),S("Terrapapers","http://terrapapers.com/"),S("Τραιανού","https://traianou.gr/"),S("Πάρε-Δώσε","https://www.pare-dose.net/"),S("Anaximandros","https://nikolaosanaximandros.gr/"),S("Awakengr","https://www.awakengr.com/"),S("Έσσετ' Ήμαρ","http://perseasorion.blogspot.com/"),S("Πύλη του Φωτός","https://gateoflight.blogspot.com/"),S("Εννέα Έτη Φωτός","http://enneaetifotos.blogspot.com/")]],
+    ["Στο Facebook",[S("Fileas Fonk","https://www.facebook.com/fileashistory"),S("Φιλέας Πετρίδης","https://www.facebook.com/fileas.petridis"),S("Κωνσταντίνος Φαρσαλινός","https://facebook.com/konstantinos.farsalinos"),S("Κωνσταντίνος Βαθιώτης","https://facebook.com/kvathiot"),S("Νίκος Καστανιάς","https://www.facebook.com/nicos.kastanias"),S("Δημήτριος Κουβέλας","https://facebook.com/dimitrios.kouvelas")]]]},
+   {id:"topics",k:"Συζητήσεις",t:"Θέματα που παρακολουθώ",groups:[
+    ["",[S("PS5 — Insomnia","https://www.insomnia.gr/forums/topic/809061-playstation-5pro-topic-v4/"),S("PlayStation Plus — Insomnia","https://www.insomnia.gr/forums/topic/831024-playstation-plus-%CF%83%CF%85%CE%BD%CE%B4%CF%81%CE%BF%CE%BC%CE%AE-%CF%84%CE%BF%CF%85%CF%81%CE%BA%CE%AF%CE%B1%CF%82-v2/"),S("iOS 27 — iPhoneHellas","http://www.iphonehellas.gr/forum/topic/174163-ios-27/"),S("iPhone — MacRumors","https://forums.macrumors.com/forums/iphone.99/"),S("Stremio — ADSLgr","https://www.adslgr.com/forum/threads/1256802-stremio-media-center"),S("Magenta Pay — Insomnia","https://www.insomnia.gr/forums/topic/810213-magenta-pay-by-telekom-former-payzy/")]]]},
+   {id:"tools",k:"Καθημερινότητα",t:"Χρήσιμα",groups:[
+    ["",[S("ΟΑΣΑ Telematics","https://telematics.oasa.gr/"),S("Ημερολόγιο Απεργιών","https://www.apergia.gr/"),S("ΕΥΔΑΠ — Ο λογαριασμός μου","https://www.eydap.gr/MyAccount/MyCurrentAccountAM/"),S("myDATA — Τιμολόγιο","https://mydata.aade.gr/timologio"),S("Dropbox","https://www.dropbox.com/home"),S("eSIM.GG","https://esim.gg/"),S("Router","http://192.168.1.1/")]],
+    ["Μαθαίνω",[S("Coursera","https://www.coursera.org/"),S("AI Use Cases","https://ainalysis.pro/learn-ai/top-use-cases-ai-agents/")]]]}
+ ]
+];
+
+const host=u=>{try{return new URL(u).hostname.replace(/^www\d?\./,"").replace(/^m\./,"")}catch(e){return""}};
+const esc=s=>s.replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const item=l=>`<li data-k="${esc((l.n+" "+host(l.u)).toLowerCase())}"><a href="${esc(l.u)}" target="_blank" rel="noopener"><span class="n">${esc(l.n)}</span><span class="d">${esc(host(l.u))}</span></a></li>`;
+
+document.getElementById("daily").innerHTML=daily.map(([n,u,c])=>
+ `<a class="app" href="${esc(u)}" target="_blank" rel="noopener" data-k="${esc(n.toLowerCase())}"><span class="mono" style="background:${c}">${esc(n[0])}</span>${esc(n)}</a>`).join("");
+
+document.getElementById("paper").innerHTML=cols.map(col=>`<div class="col">${col.map(s=>`
+ <section id="${s.id}" class="${s.lead?"lead":""}"><p class="kicker">${esc(s.k)}</p><h2>${esc(s.t)}</h2>
+ ${s.groups.map(([h,ls])=>`${h?`<h3>${esc(h)}</h3>`:""}<ul class="${!s.lead&&ls.length>7?"two":""}">${ls.map(item).join("")}</ul>`).join("")}
+ </section>`).join("")}</div>`).join("");
+
+const now=new Date();
+document.getElementById("date").textContent=now.toLocaleDateString("el-GR",{weekday:"long",day:"numeric",month:"long",year:"numeric"});
+const h=now.getHours();
+const part=h<12?"Καλημέρα":h<18?"Καλό απόγευμα":"Καλησπέρα";
+document.getElementById("greet").innerHTML=`${part}. Τα νέα, τα αθλητικά και τα blogs σου <b>σε μία σελίδα</b>`;
+
+const q=document.getElementById("q");
+q.addEventListener("input",()=>{
+  const v=q.value.trim().toLowerCase();let any=false;
+  document.querySelectorAll("[data-k]").forEach(el=>{const m=!v||el.dataset.k.includes(v);el.hidden=!m;if(m&&v)any=true});
+  document.querySelectorAll("section").forEach(sec=>{
+    sec.querySelectorAll("ul").forEach(ul=>{const vis=[...ul.children].some(li=>!li.hidden);ul.hidden=!vis;const h3=ul.previousElementSibling;if(h3&&h3.tagName==="H3")h3.hidden=!vis});
+    sec.hidden=v&&![...sec.querySelectorAll("li")].some(li=>!li.hidden);
+  });
+  document.getElementById("none").hidden=!v||any;
+});
+</script>
+
+</body>
+</html>
